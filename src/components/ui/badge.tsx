@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
 import { TaskPriorityEnum, TaskStatusEnum } from "@/constant";
 
@@ -15,19 +16,15 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
         outline: "text-foreground",
-
-        // Task Status variants
         [TaskStatusEnum.BACKLOG]: "bg-gray-100 text-gray-600",
-        [TaskStatusEnum.TODO]: "bg-[#DEEBFF] text-[#0052CC]",
+        [TaskStatusEnum.TODO]: "  bg-[#DEEBFF] text-[#0052CC]",
         [TaskStatusEnum.IN_PROGRESS]: "bg-yellow-100 text-yellow-600",
         [TaskStatusEnum.IN_REVIEW]: "bg-purple-100 text-purple-500",
         [TaskStatusEnum.DONE]: "bg-green-100 text-green-600",
-
-        // Task Priority variants
         [TaskPriorityEnum.HIGH]: "bg-orange-100 text-orange-600",
+        [TaskPriorityEnum.URGENT]: "bg-red-100 text-red-600",
         [TaskPriorityEnum.MEDIUM]: "bg-yellow-100 text-yellow-600",
         [TaskPriorityEnum.LOW]: "bg-gray-100 text-gray-600",
-        // ✅ Remove URGENT if not present in TaskPriorityEnum
       },
     },
     defaultVariants: {
@@ -40,10 +37,10 @@ export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {}
 
-export function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({ className, variant, ...props }: BadgeProps) {
   return (
     <div className={cn(badgeVariants({ variant }), className)} {...props} />
   );
 }
 
-export { badgeVariants };
+export { Badge, badgeVariants };
