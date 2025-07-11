@@ -17,12 +17,12 @@ const badgeVariants = cva(
           "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
         outline: "text-foreground",
         [TaskStatusEnum.BACKLOG]: "bg-gray-100 text-gray-600",
-        [TaskStatusEnum.TODO]: "  bg-[#DEEBFF] text-[#0052CC]",
+        [TaskStatusEnum.TODO]: "bg-[#DEEBFF] text-[#0052CC]",
         [TaskStatusEnum.IN_PROGRESS]: "bg-yellow-100 text-yellow-600",
         [TaskStatusEnum.IN_REVIEW]: "bg-purple-100 text-purple-500",
         [TaskStatusEnum.DONE]: "bg-green-100 text-green-600",
         [TaskPriorityEnum.HIGH]: "bg-orange-100 text-orange-600",
-        [TaskPriorityEnum.URGENT]: "bg-red-100 text-red-600",
+        [TaskPriorityEnum.URGENT]: "bg-red-100 text-red-600", // ✅ Works now
         [TaskPriorityEnum.MEDIUM]: "bg-yellow-100 text-yellow-600",
         [TaskPriorityEnum.LOW]: "bg-gray-100 text-gray-600",
       },
@@ -37,10 +37,10 @@ export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+const Badge = ({ className, variant, ...props }: BadgeProps) => {
   return (
     <div className={cn(badgeVariants({ variant }), className)} {...props} />
   );
-}
+};
 
-export { Badge, badgeVariants };
+export default Badge;
